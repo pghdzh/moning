@@ -33,7 +33,7 @@
       </RouterLink>
 
       <a
-        href="http://36.150.237.25/#/redirector"
+        href="https://36.150.237.25/#/redirector"
         target="_blank"
         rel="noopener"
         class="nav-item"
@@ -76,7 +76,7 @@ const siteId = "moning";
 
 const onlineCount = ref<number | null>(null);
 
-const socket: any = io("http://36.150.237.25:3000", {
+const socket: any = io(import.meta.env.VITE_API_BASE_URL, {
   query: { siteId },
 });
 
@@ -253,7 +253,6 @@ const initParticles = () => {
     0 0 0 1px rgba(74, 165, 255, 0.2) inset, 0 4px 12px rgba(74, 165, 255, 0.1);
   border-bottom: 1px solid rgba(74, 165, 255, 0.25);
   animation: slideInDown 0.4s ease-out;
-  
 
   // 粒子画布
   .particle-canvas {

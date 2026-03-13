@@ -241,7 +241,13 @@ const observerCard = new IntersectionObserver(
   },
   { threshold: 0.1 }
 );
-
+const fixImageUrl = (url: string): string => {
+  if (url.includes("127.0.0.1")) {
+    // 将 127.0.0.1 替换为当前页面的完整源（协议+域名）
+    return url.replace("http://127.0.0.1", window.location.origin);
+  }
+  return url;
+};
 async function observeNewCards(startIndex = 0) {
   await nextTick();
   const cards = document.querySelectorAll<HTMLElement>(".card");
@@ -266,7 +272,7 @@ async function loadNextPage() {
     const list = (
       res.images as Array<{ url: string; like_count: number; id: number }>
     ).map((item) => ({
-      src: item.url,
+      src: fixImageUrl(item.url),
       alt: "",
       likeCount: item.like_count,
       id: item.id,
